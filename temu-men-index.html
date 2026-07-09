@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>胖达龙 - 男装裤类目分类测试</title>
+<style>
+:root {
+  --primary: #1a73e8;
+  --primary-light: #e8f0fe;
+  --dark: #202124;
+  --gray: #5f6368;
+  --light-gray: #f8f9fa;
+  --border: #dadce0;
+  --white: #ffffff;
+  --card-shadow: 0 1px 3px rgba(60,64,67,0.12), 0 1px 2px rgba(60,64,67,0.08);
+  --card-shadow-hover: 0 4px 12px rgba(60,64,67,0.15), 0 2px 6px rgba(60,64,67,0.1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--dark);
+  background: var(--light-gray);
+  line-height: 1.7;
+}
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, #4285f4 100%);
+  color: var(--white);
+  padding: 45px 30px;
+  border-radius: 16px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+.hero h1 { font-size: 2em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 1.05em; opacity: 0.9; margin-bottom: 12px; }
+.hero .meta { font-size: 0.85em; opacity: 0.8; }
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+.stat-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 18px 30px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  min-width: 120px;
+}
+.stat-card .num { font-size: 2em; font-weight: 700; color: var(--primary); }
+.stat-card .label { font-size: 0.85em; color: var(--gray); }
+.filter-bar {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.filter-bar label { font-weight: 600; color: var(--gray); font-size: 0.9em; }
+.filter-bar select {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9em;
+  cursor: pointer;
+  background: var(--white);
+  color: var(--dark);
+}
+.filter-bar select:focus { outline: 2px solid var(--primary); }
+.category-section { margin-bottom: 30px; }
+.category-title {
+  font-size: 1.3em;
+  color: var(--dark);
+  margin-bottom: 15px;
+  padding: 10px 16px;
+  border-left: 5px solid var(--primary);
+  background: var(--primary-light);
+  border-radius: 0 8px 8px 0;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+.style-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.25s, transform 0.25s;
+  border: 1px solid transparent;
+}
+.style-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+.style-card .style-name {
+  font-size: 1.05em;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.style-card .category-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.tag-qixiu { background: #e8f0fe; color: #1a73e8; }
+.tag-yundong { background: #e6f4ea; color: #137333; }
+.tag-wei { background: #fef7e0; color: #b06000; }
+.style-card .paths { font-size: 0.82em; }
+.style-card .path-item {
+  padding: 6px 10px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  background: var(--light-gray);
+  color: var(--gray);
+  line-height: 1.5;
+}
+.style-card .path-item .path-label {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--dark);
+  display: block;
+  margin-bottom: 2px;
+}
+.footer {
+  text-align: center;
+  padding: 30px;
+  color: var(--gray);
+  font-size: 0.85em;
+}
+@media (max-width: 600px) {
+  .container { padding: 12px; }
+  .hero { padding: 30px 20px; }
+  .hero h1 { font-size: 1.5em; }
+  .cards-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="hero">
+  <h1>胖达龙 · 男装裤类目分类测试</h1>
+  <div class="subtitle">男士休闲裤 & 男士运动长裤 类目款式分类参考</div>
+  <div class="meta">共13页 · 25个款式分类 · 3大类目</div>
+</div>
+<div class="stats">
+  <div class="stat-card"><div class="num">11</div><div class="label">其他休闲裤</div></div>
+  <div class="stat-card"><div class="num">6</div><div class="label">运动功能裤</div></div>
+  <div class="stat-card"><div class="num">8</div><div class="label">卫裤</div></div>
+</div>
+<div class="filter-bar">
+  <label>筛选类目：</label>
+  <select id="filterSelect" onchange="filterCategory()">
+    <option value="all">全部</option>
+    <option value="qixiu">其他休闲裤</option>
+    <option value="yundong">运动功能裤</option>
+    <option value="wei">卫裤</option>
+  </select>
+</div>
+  <div class="category-section" data-cat="qixiu">
+    <div class="category-title">👖 其他休闲裤（11款）</div>
+    <div class="cards-grid">
+      <div class="style-card">
+        <div class="style-name">肌理面料 - 直筒裤</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">休闲商务 - 直筒裤</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">装饰叠加 - 束脚裤</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">肌理面料 - 锥形/窄脚裤</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">休闲商务 - 阔腿裤</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">特殊工艺 - 直筒裤</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">特殊工艺 - 束脚裤</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">肌理面料 - 阔腿裤</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">西部风</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">时尚都市 - 喇叭裤</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">装饰叠加 - 锥形/窄脚裤</div>
+        <span class="category-tag tag-qixiu">其他休闲裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="category-section" data-cat="yundong">
+    <div class="category-title">🏃 运动功能裤（6款）</div>
+    <div class="cards-grid">
+      <div class="style-card">
+        <div class="style-name">运动健身裤 - 锥形/窄脚裤</div>
+        <span class="category-tag tag-yundong">运动功能裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">运动健身裤 - 束脚裤</div>
+        <span class="category-tag tag-yundong">运动功能裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">运动健身裤 - 直筒裤</div>
+        <span class="category-tag tag-yundong">运动功能裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">高尔夫裤</div>
+        <span class="category-tag tag-yundong">运动功能裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">紧身裤</div>
+        <span class="category-tag tag-yundong">运动功能裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">马术裤</div>
+        <span class="category-tag tag-yundong">运动功能裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="category-section" data-cat="wei">
+    <div class="category-title">🏋️ 卫裤（8款）</div>
+    <div class="cards-grid">
+      <div class="style-card">
+        <div class="style-name">运动卫裤 - 束脚裤</div>
+        <span class="category-tag tag-wei">卫裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">运动卫裤 - 锥形/窄脚裤</div>
+        <span class="category-tag tag-wei">卫裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">休闲卫裤 - 阔腿裤</div>
+        <span class="category-tag tag-wei">卫裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">潮流卫裤 - 束脚裤</div>
+        <span class="category-tag tag-wei">卫裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">双腰头</div>
+        <span class="category-tag tag-wei">卫裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">休闲卫裤 - 锥形/窄脚裤</div>
+        <span class="category-tag tag-wei">卫裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">肌理面料 - 锥形/窄脚裤</div>
+        <span class="category-tag tag-wei">卫裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+      <div class="style-card">
+        <div class="style-name">特殊工艺 - 直筒裤</div>
+        <span class="category-tag tag-wei">卫裤</span>
+        <div class="paths">
+          <div class="path-item"><span class="path-label">路径1</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男装长裤 > 男士休闲裤</div>
+          <div class="path-item"><span class="path-label">路径2</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士运动长裤</div>
+          <div class="path-item"><span class="path-label">路径3</span>服装、鞋靴和珠宝饰品 > 男士时尚 > 男装 > 男士休闲运动服 > 男士休闲运动长裤 > 男士宽松运动长裤</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="footer">
+  <p>胖达龙 · 男装裤类目分类测试文档</p>
+  <p>本网页由PDF文档转换生成，仅供参考</p>
+</div>
+</div>
+<script>
+function filterCategory() {
+  var val = document.getElementById('filterSelect').value;
+  var sections = document.querySelectorAll('.category-section');
+  sections.forEach(function(s) {
+    if (val === 'all' || s.dataset.cat === val) {
+      s.style.display = '';
+    } else {
+      s.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
